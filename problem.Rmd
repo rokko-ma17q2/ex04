@@ -21,12 +21,12 @@ documentclass: scrartcl
 
 # Overview
 
-Think of a situation where you write your thesis, a paper, slides, weekly 
-reports to your boss or to future you. You may have an idea for the proof 
+Think of a situation where you write your thesis, a paper, slides, or weekly 
+reports to your advisor or future you. You may have an idea for the proof 
 of your conjecture. You may want to discuss why the mechanism you describe 
 in the article/note/journal works as you expect. 
 
-You can demonstrate your idea unambiguously with mathematical expressions. 
+You can demonstrate your idea most unambiguously with mathematical expressions. 
 To reveal the economic intuition behind your theory, you must 
 elaborate on the mechanism in words. Often times, drawing a graphical sketch 
 of your theory is the most effective way to convey your idea to the reader.
@@ -68,9 +68,10 @@ If you work on Windows, PowerPoint is an alternative. As a sample I
 attach the presentation file I used for a class. Uncompress 
 `asset/images/solow_model.key.zip` and open `solow_model.key` with 
 Keynote for Mac to see how I draw the graphs and set fonts for mathematical 
-expressions.^[To embed more complex mathematical expressions in a presentation
-file, I use LaTeXit, which converts a LaTeX code snippet into an image of
-the rendered math expressions.] 
+expressions.^[My favorite choice is Palatino fonts in bold italics, which 
+go well with `mathpazo` package of LaTeX. To embed more complex mathematical 
+expressions in a presentation file, I use LaTeXit, which converts a LaTeX 
+code snippet into an image of the rendered math expressions.] 
 
 
 ## Export {-}
@@ -87,16 +88,16 @@ a sample.
 
 Now that we have the graphs, let's move to RStudio and to an R Markdown file.
 
-Set global knit options at the beginning of the document with  
-a code chunk similar to below. This set the default figure width 
-to 14cm and default alignment to center.
+Set global knit options at the beginning of the document with a code chunk similar to below. This set the default figure width to 14cm and default alignment to center. 
+
+Your `solution.Rmd` already has this chunk.
 
     `r ''````{r, include=FALSE}
-    knitr::opts_chunk$set(fig.align = 'center', out.width = "14cm")
+    knitr::opts_chunk$set(fig.align = 'center', out.width = "12cm")
     ```
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(fig.align = 'center', out.width = "14cm")
+knitr::opts_chunk$set(fig.align = 'center', out.width = "12cm")
 ```
 
 To embed the first page of the PDF, You can use a code chunk as follows: 
@@ -105,19 +106,41 @@ To embed the first page of the PDF, You can use a code chunk as follows:
     knitr::include_graphics("asset/images/solow_model.pdf")
     ```
 
-This R code chunk produces Figure \@ref(fig:solow1).^[Please have look at the source file (`problem.Rmd`) to see how I used text reference for the caption. See https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references]
-I used cross-reference command `\@ref(fig:solow1)` here. Note that the chunk label (`solow1`) with prefix `fig:` is used as a pointer to the figure. 
+This R code chunk produces Figure \@ref(fig:solow1). I used cross-reference command `\@ref(fig:solow1)` here. Note that the chunk label (`solow1`) with prefix `fig:` is used as a pointer to the figure. 
+
+Please have a look at the source file (`problem.Rmd`) to see how I take advantage of 
+text reference for the caption (`fig.cap` option).^[For more detail, see  https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references]
+This feature comes in handy when the caption is long.
+
+The chunk option, `out.extra="page=1"`, is a special option used when including a page 
+from a multiple-page PDF file. `out.extra="page=n"` includes n-th page of the PDF 
+file specified as the argument to `knitr::include_graphics()` function.
 
 ```{r solow1, fig.cap="(ref:solow1)", out.extra="page=1",echo=FALSE}
 knitr::include_graphics("asset/images/solow_model.pdf")
 ```
 
 (ref:solow1) Solow Model
-`
 
 
+```{r solow2, fig.cap="(ref:solow2)", out.extra="page=7",echo=FALSE}
+knitr::include_graphics("asset/images/solow_model.pdf")
+```
+
+(ref:solow2) Increase in $s$
 
 
 # Problem
+
+Produce a figure similar to Figure \@ref(fig:solow2) but for the case of 
+a sudden decrease of $s$. Put the file in `figures`. In the body of the document, explain what happens 
+to $k$ after the parameter change. 
+
+The document must have all of the following.
+
+* Correct graph
+* Reasonable caption and 
+* Reference to the Figure in the body at least once (If you use more than 
+  one figure, all figures must be mentioned once.)
 
 
